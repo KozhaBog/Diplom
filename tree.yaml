@@ -1,0 +1,9 @@
+---
+- name: install tree
+  hosts: all
+  gather_facts: yes
+  become: no
+
+  tasks:
+  - name: eblan
+    apt: name=tree state=latest

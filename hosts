@@ -1,0 +1,8 @@
+[my_homies:vars]
+ansible_user=kozha
+ansible_become=yes
+ansible_become_method=sudo
+
+[my_homies]
+linux1 ansible_host=192.168.80.128 ansible_user=kozha ansible_sudo_pass=9police9man9
+linux2 ansible_host=192.168.80.130 ansible_user=kozha ansible_sudo_pass=policeman
