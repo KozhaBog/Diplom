@@ -2,9 +2,9 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/yandex-cloud/yandex" {
-  version     = "0.91.0"
-  constraints = "0.91.0"
+  version     = "0.100.0"
+  constraints = "0.100.0"
   hashes = [
-    "h1:4s+FoYf6bd3ERi4p9l+gRmCXE6Q/s4mDJZ6H1ICTy5c=",
+    "h1:X43/D9s1IHupRYWcgo6zix9389g/1nzhBuqmzRjNhhI=",
   ]
 }

@@ -2,7 +2,7 @@ terraform {
   required_providers {
     yandex = {
       source  = "yandex-cloud/yandex"
-      version = "0.91.0" # Фиксируем версию провайдера
+      version = "0.100"# Фиксируем версию провайдера
     }
   }
 }
@@ -22,4 +22,10 @@ resource "yandex_vpc_subnet" "subnet1" {
   zone           = "ru-central1-a"
   network_id     = yandex_vpc_network.network.id
   v4_cidr_blocks = ["192.168.10.0/24"]
+}
+
+module "ya_instance_1" {
+  source                = "./modules"
+  instance_family_image = "ubuntu-2204-lts"
+  vpc_subnet_id         = yandex_vpc_subnet.subnet1.id
 }
