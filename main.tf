@@ -24,12 +24,8 @@ resource "yandex_vpc_subnet" "subnet1" {
   v4_cidr_blocks = ["192.168.10.0/24"]
 }
 
-<<<<<<< HEAD
 module "ya_instance_1" {
   source                = "./modules"
   instance_family_image = "ubuntu-2204-lts"
   vpc_subnet_id         = yandex_vpc_subnet.subnet1.id
 }
-=======
-output "" 
->>>>>>> bf82d56ad9f7d55bc9968654e81c357da521cf6d
