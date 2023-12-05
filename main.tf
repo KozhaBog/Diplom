@@ -14,18 +14,32 @@ provider "yandex" {
 }
 
 resource "yandex_vpc_network" "network" {
-  name = "deploy-network"
+  name = "deploy_network"
 }
 
-resource "yandex_vpc_subnet" "subnet1" {
-  name           = "subnet1"
+resource "yandex_vpc_subnet" "subnet-1" {
+  name           = "subnetmaster"
   zone           = "ru-central1-a"
-  network_id     = yandex_vpc_network.network.id
-  v4_cidr_blocks = ["192.168.10.0/24"]
+  network_id     = "${yandex_vpc_network.network.id}"
+  v4_cidr_blocks = ["10.2.0.0/16"]
 }
 
-module "ya_instance_1" {
-  source                = "./modules"
+
+module "k8s_master" {
+  source                = "./modules/k8s/master"
   instance_family_image = "ubuntu-2204-lts"
-  vpc_subnet_id         = yandex_vpc_subnet.subnet1.id
+  vpc_subnet_id         = yandex_vpc_subnet.subnet-1.id
 }
+
+module "k8s_worker" {
+  source                = "./modules/k8s/worker"
+  instance_family_image = "ubuntu-2204-lts"
+  vpc_subnet_id         = yandex_vpc_subnet.subnet-1.id
+}
+output "kakoi_ip_master" {
+  value = module.k8s_master.external_ip_address_vm
+}
+output "kakoi_ip" {
+  value = module.k8s_worker.external_ip_address_vm
+}
+
