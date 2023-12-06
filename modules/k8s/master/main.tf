@@ -11,10 +11,6 @@ data "yandex_compute_image" "my_image" {
 }
 resource "yandex_compute_instance" "vm" {
   name = "master"
-  provisioner "local-exec" {
-    command = "apt install openssh"
-    }
-    
 
   resources {
     core_fraction = 20

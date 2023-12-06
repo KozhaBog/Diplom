@@ -12,7 +12,6 @@ data "yandex_compute_image" "my_image" {
 resource "yandex_compute_instance" "vm" {
   name = "monitoring"
 
-
   resources {
     core_fraction = 20
     cores  = 2
@@ -31,7 +30,6 @@ resource "yandex_compute_instance" "vm" {
   }
 
   metadata = {
-    foo      = "bar"
     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa")}"
   }
 }
