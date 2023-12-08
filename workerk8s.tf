@@ -1,21 +1,11 @@
-terraform {
-  required_providers {
-    yandex = {
-      source  = "yandex-cloud/yandex"
-      version = "0.100" # Фиксируем версию провайдера
-    }
-  }
-}
-data "yandex_compute_image" "my_image" {
-  family = var.instance_family_image
-}
+/*
 resource "yandex_compute_instance" "worker" {
   name = "worker"
 
   resources {
     core_fraction = 20
     cores  = 2
-    memory = 1
+    memory = 4
   }
 
   boot_disk {
@@ -25,7 +15,7 @@ resource "yandex_compute_instance" "worker" {
   }
 
   network_interface {
-    subnet_id = var.vpc_subnet_id
+    subnet_id = yandex_vpc_subnet.k8s-subnet.id
     nat       = true
   }
 
@@ -33,3 +23,4 @@ resource "yandex_compute_instance" "worker" {
     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa")}"
   }
 }
+*/

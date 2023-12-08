@@ -1,16 +1,19 @@
-variable "folder_id" {
-  description = "Default folder ID in yandex cloud"
+variable "instance_family_image" {
+  description = "Instance image"
   type        = string
-  default     = "b1g07boj4j03d4ln6dhf"
-}
-variable "cloud_id" {
-  description = "Default cloud ID in yandex cloud"
-  type        = string
-  default     = "b1gb0d8kokqae5noef7s"
+  default     = "ubuntu-1804-lts"
 }
 
-variable "token" {
-  description = "Default token in yandex cloud"
-  type        = string
-  default     = "y0_AgAAAAAUGMM5AATuwQAAAADj5p1NwZol4arwRKKQIWj-DWzJPP9lYqg"
+variable "ssh_credentials" {
+  description = "Credentials for connect to instances"
+  type        = object({
+    user        = string
+    private_key = string
+    pub_key     = string
+  })
+  default     = {
+    user        = "ubuntu"
+    private_key = "~/.ssh/id_rsa"
+    pub_key     = "~/.ssh/id_rsa.pub"
+  }
 }
