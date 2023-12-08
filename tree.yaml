@@ -1,8 +1,7 @@
 ---
 - name: install tree
   hosts: all
-  gather_facts: yes
-  become: no
+  become: yes
 
   tasks:
   - name: eblan

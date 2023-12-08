@@ -9,7 +9,7 @@ terraform {
 data "yandex_compute_image" "my_image" {
   family = var.instance_family_image
 }
-resource "yandex_compute_instance" "vm" {
+resource "yandex_compute_instance" "worker" {
   name = "worker"
 
   resources {

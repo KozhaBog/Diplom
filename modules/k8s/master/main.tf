@@ -6,10 +6,11 @@ terraform {
     }
   }
 }
+
 data "yandex_compute_image" "my_image" {
   family = var.instance_family_image
 }
-resource "yandex_compute_instance" "vm" {
+resource "yandex_compute_instance" "master" {
   name = "master"
 
   resources {
@@ -28,10 +29,7 @@ resource "yandex_compute_instance" "vm" {
     subnet_id = var.vpc_subnet_id
     nat       = true
   }
-
-  metadata = {
+     metadata = {
     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
 }
-
-

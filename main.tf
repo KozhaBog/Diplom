@@ -31,6 +31,7 @@ module "k8s_master" {
   vpc_subnet_id         = yandex_vpc_subnet.subnet-1.id
 }
 
+/*
 module "k8s_worker" {
   source                = "./modules/k8s/worker"
   instance_family_image = "ubuntu-2204-lts"
@@ -42,11 +43,11 @@ module "srv" {
   instance_family_image = "ubuntu-2204-lts"
   vpc_subnet_id         = yandex_vpc_subnet.subnet-1.id
 }
-
+*/
 output "kakoi_ip_master" {
   value = module.k8s_master.external_ip_address_vm
 }
-
+/*
 output "kakoi_ip_worker" {
   value = module.k8s_worker.external_ip_address_vm
 }
@@ -54,3 +55,4 @@ output "kakoi_ip_worker" {
 output "kakoi_ip_monitoring" {
   value = module.k8s_worker.external_ip_address_vm
 }
+*/
