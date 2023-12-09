@@ -1,5 +1,6 @@
 resource "yandex_compute_instance" "master" {
   name = "master"
+  hostname = "master"
 
   resources {
     cores  = 2
@@ -9,7 +10,7 @@ resource "yandex_compute_instance" "master" {
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.my_image.id
-      size     = 9
+      size     = 10
     }
   }
 

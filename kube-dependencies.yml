@@ -56,8 +56,19 @@
         remote_src: yes
         owner: ubuntu
 
-   - name: install Pod network
-     shell: kubectl apply -f https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml >> pod_network_setup.txt
-     args:
-       chdir: $HOME
-       creates: pod_network_setup.txt
+   - name: Download yml
+     get_url: 
+       url: https://github.com/coreos/flannel/raw/master/Documentation/kube-flannel.yml
+       dest: /home/ubuntu/kube-flannel.yml
+       mode: 0777
+       
+   - name: Instal pods
+     become: false
+     shell: "{{ item }}"
+     with_items:
+       - kubectl apply -f /home/ubuntu/kube-flannel.yml >| cluster_initialized.txt
+       
+   - name: Generate join command
+     become_user: ubuntu
+     command: kubeadm token create --print-join-command
+     register: join_command
