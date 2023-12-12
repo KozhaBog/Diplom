@@ -1,6 +1,0 @@
----
-- name: allo ebat
-  hosts: all
-  become: yes
- 
-  roles: install_docker

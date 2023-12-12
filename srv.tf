@@ -1,6 +1,5 @@
-/*
 resource "yandex_compute_instance" "srv" {
-  name = "monitoring"
+  name = "srv"
 
   resources {
     core_fraction = 20
@@ -11,6 +10,7 @@ resource "yandex_compute_instance" "srv" {
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.my_image.id
+      size     = 10
     }
   }
 
@@ -18,9 +18,7 @@ resource "yandex_compute_instance" "srv" {
     subnet_id = yandex_vpc_subnet.k8s-subnet.id
     nat       = true
   }
-
-  metadata = {
-    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa")}"
+     metadata = {
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
 }
-*/

@@ -1,4 +1,3 @@
-/*
 resource "yandex_compute_instance" "worker" {
   name = "worker"
 
@@ -11,6 +10,7 @@ resource "yandex_compute_instance" "worker" {
   boot_disk {
     initialize_params {
       image_id = data.yandex_compute_image.my_image.id
+      size     = 10
     }
   }
 
@@ -18,9 +18,7 @@ resource "yandex_compute_instance" "worker" {
     subnet_id = yandex_vpc_subnet.k8s-subnet.id
     nat       = true
   }
-
-  metadata = {
-    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa")}"
+     metadata = {
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
 }
-*/
