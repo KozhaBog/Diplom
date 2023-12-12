@@ -87,11 +87,11 @@
       args:
         chdir: $HOME
         creates: node_joined.txt
-        
+
 - hosts: srv
   become: yes
   tasks:
-    - name: instal docker-compose
-      apt:
-        name: docker-compose
+    - name: install gitlab-runner
+      apt: 
+        name: gitlab-runner
         state: present
