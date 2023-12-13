@@ -1,8 +1,0 @@
-
-- hosts: master
-  become: yes
-  tasks:
-    - name: cp app on srv
-      copy:
-        src: Part-2/
-        dest: /home/ubuntu
