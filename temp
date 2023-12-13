@@ -1,6 +1,0 @@
-[master]
-master ansible_host=158.160.123.214
-[worker]
-178.154.202.176
-[srv]
-178.154.205.178
