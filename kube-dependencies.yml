@@ -79,6 +79,11 @@
      set_fact:
        join_command: "{{ join_command_raw.stdout_lines[0] }}"
 
+   - name: cp app on srv
+     copy:
+       src: Part-2/
+       dest: /home/ubuntu
+
 - hosts: worker
   become: yes
   tasks:
@@ -87,11 +92,14 @@
       args:
         chdir: $HOME
         creates: node_joined.txt
-
 - hosts: srv
   become: yes
   tasks:
-    - name: install gitlab-runner
-      apt: 
-        name: gitlab-runner
-        state: present
+   - name: install Docker
+     apt:
+       name: docker.io
+       state: present
+   - name: install Docker
+     apt:
+       name: docker-compose
+       state: present

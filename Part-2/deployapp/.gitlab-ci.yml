@@ -1,0 +1,28 @@
+---
+variables:
+  TAG: "v1.1"
+  CI_NAMESPACE: "diplom"
+
+stages:
+  - build
+  - deploy
+
+docker_build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  rules:
+    - if: $TAG =~ /^v\d+.\d+/
+      exists:
+        - Dockerfile
+    - when: on_success
+    - when: manual
+  before_script:
+     - sudo docker login -u "$REG_USER" -p "$REG_PASSWORD"
+  script:
+    - export
+    - tag='$TAG'
+    - echo "Running build with tag $TAG "
+    - sudo docker build -t "$REG_USER"/diplom:$TAG .
+    - sudo docker push "$REG_USER"/diplom:$TAG
