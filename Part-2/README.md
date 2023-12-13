@@ -18,14 +18,28 @@ docker-compose down
 11.	Копируем токен аутентификации
 ![image](https://github.com/KozhaBog/Diplom/assets/122201504/e4df0279-f62c-40dd-831a-f5486f19635c)
 12.	На сервере копируем к себе пустой гит проекта, командой ниже, вместо пароля вставляем наш токен, полученный выше перекидываем папку app в него
-****git clone https://gitlab.com/KozhaBog/diplom.git
+```
+git clone https://gitlab.com/KozhaBog/diplom.git
+```
+```
 mv -f app/* deployapp/ 
+```
+```
 mv -f app/.gitlab-ci.yml /deployapp
+```
+```
 cd deployapp
+```
+```
 git add .
+```
+```
 git commit -m “Deploy CI”
-git push origin****
-lab, вместо пароля вставляем Access Token, полученный выше.
+```
+```
+git push origin
+```
+Вводим свой ник с Gitlab, вместо пароля вставляем Access Token, полученный выше.
 13.	У нас автоматически запустится pipeline сборки и отправки образа в DockerHub. Проверим Jobs и Dockerhub
 ![image](https://github.com/KozhaBog/Diplom/assets/122201504/57f6e208-c2ff-4339-ae8f-daa79cb133f7)
 ![image](https://github.com/KozhaBog/Diplom/assets/122201504/ef213e35-4c8b-4faa-8c65-364798e10db0)
