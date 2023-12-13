@@ -32,6 +32,10 @@
      apt:
        name: kubeadm
        state: present
+   - name: install tree
+     apt:
+       name: tree
+       state: present
 
 - hosts: master
   become: yes
