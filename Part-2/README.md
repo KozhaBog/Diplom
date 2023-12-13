@@ -26,4 +26,26 @@ git add .
 git commit -m “Deploy CI”
 git push origin****
 lab, вместо пароля вставляем Access Token, полученный выше.
-17.	У нас автоматически запустится pipeline сборки и отправки образа в DockerHub. Проверим Jobs и Dockerhub
+13.	У нас автоматически запустится pipeline сборки и отправки образа в DockerHub. Проверим Jobs и Dockerhub
+![image](https://github.com/KozhaBog/Diplom/assets/122201504/57f6e208-c2ff-4339-ae8f-daa79cb133f7)
+![image](https://github.com/KozhaBog/Diplom/assets/122201504/ef213e35-4c8b-4faa-8c65-364798e10db0)
+14.	Заходим в папку k8s. Видим уже готовые манифесты. Деплоим ручками.
+kubectl apply -f .
+15.	Проверяем работу на сайте, пишем команду, смотрим наши ip и порт
+![image](https://github.com/KozhaBog/Diplom/assets/122201504/b6a04904-1f83-481f-a49a-61dcaf921b83)
+![image](https://github.com/KozhaBog/Diplom/assets/122201504/97c8ea4f-aac4-42d3-9ff7-1598a68c6837)
+16.	В этой же папке уже собран чарт helm. Можно увидеть следующей командой
+tree appchart
+17.	Возвращаемся в папку deployapp, добавляем деплой хелм чарта в .gitlab-ci.yaml и пушим.
+
+app_deploy: 
+  stage: deploy
+  environment: production
+  script:
+    - tag=$TAG
+    - echo "Deploy app django-pg-docker-tutorial build version $TAG"
+    - export KUBECONFIG=/opt/.kube/config
+    - cd app-dpdt/ && helm upgrade --install -n default --values templates/credentials.yaml --set service.type=NodePort app-dpdt .
+    - kubectl get pods
+
+18.	После обрабатывания успешно Jobs можно переходит к настройке мониторинга.
