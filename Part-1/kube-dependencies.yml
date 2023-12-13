@@ -81,7 +81,7 @@
 
    - name: cp app on srv
      copy:
-       src: Part-2/
+       src: ../Part-2/
        dest: /home/ubuntu
 
 - hosts: worker
@@ -92,6 +92,7 @@
       args:
         chdir: $HOME
         creates: node_joined.txt
+
 - hosts: srv
   become: yes
   tasks:
